@@ -7,7 +7,7 @@
     </x-slot>
 
     <x-container>
-        <x-card>
+        <x-card class="max-w-2xl">
             <x-card.header>
                 <x-card.title>{{ __('Create a Stores') }}</x-card.title>
                 <x-card.description>{{ __('Create a new store to manage your products and orders.') }}
