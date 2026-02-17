@@ -7,19 +7,35 @@
     </x-slot>
 
     <x-container>
-        <x-card class="max-w-2xl">
+        <x-card>
             <x-card.header>
                 <x-card.title>{{ __('Create a Stores') }}</x-card.title>
                 <x-card.description>{{ __('Create a new store to manage your products and orders.') }}
                 </x-card.description>
             </x-card.header>
             <x-card.content>
-                <form action="{{ route('stores.store') }}" method="POST">
+                <form action="{{ route('stores.store') }}" enctype="multipart/form-data" method="POST"
+                    class="[&div]:mb-6">
                     @csrf
                     <div class="mb-4">
                         <x-input-label for="name" value="{{ __('Store Name') }}" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" required autofocus />
+                        <x-text-input id="name" class="block mt-1" type="text" name="name" :value="old('name')" required
+                            autofocus />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    </div>
+                    <div class="mb-4">
+                        <x-input-label for="description" value="{{ __('Description') }}" />
+                        <x-textarea id="description" class="block mt-1" name="description" required>{{
+                            old('description') }}
+                        </x-textarea>
+                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                    </div>
+                    <div class="mb-4">
+                        <x-input-label for="logo" value="{{ __('Logo') }}" />
+                        <input id="logo" name="logo"
+                            class="mt-1 w-full block font-medium text-sm text-gray-700 dark:text-gray-300" type="file"
+                            required />
+                        <x-input-error :messages="$errors->get('logo')" class="mt-2" />
                     </div>
                     <div class="flex items-center justify-end mt-4">
                         <x-button class="mr-2" as="a" variant="secondary" type="button"
