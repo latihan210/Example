@@ -21,8 +21,15 @@
                     <x-card.description>{{ $store->description }}</x-card.description>
                 </x-card.header>
                 <x-card.content>
-                    <img src="{{ Storage::url($store->logo) }}" alt="{{ $store->name }}"
-                        class="size-16 rounded-lg object-cover">
+                    <div class="flex items-center justify-between">
+                        <img src="{{ Storage::url($store->logo) }}" alt="{{ $store->name }}"
+                            class="size-16 rounded-lg object-cover">
+                        @if ($store->user_id == auth()->user()->id)
+                        <x-button as="a" variant="success" href="{{ route('stores.edit', $store->id) }}">
+                            {{ __('Edit') }}
+                        </x-button>
+                        @endif
+                    </div>
                 </x-card.content>
             </x-card>
             @endforeach

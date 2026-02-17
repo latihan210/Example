@@ -21,9 +21,19 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        $logoRules = ['image', 'mimes:png,jpg,jpeg,gif,svg', 'max:2048'];
+
+        if ($this->isMethod('post')) {
+            // For creation (POST), the logo is required.
+            array_unshift($logoRules, 'required');
+        } else {
+            // For update (PUT/PATCH), the logo is optional.
+            array_unshift($logoRules, 'sometimes');
+        }
+
         return [
-            'logo' => ['required', 'image', 'mimes:png,jpg,jpeg,gif,svg', 'max:2048'],
-            'name' => ['required', 'string', 'min:3',  'max:255'],
+            'logo' => $logoRules,
+            'name' => ['required', 'string', 'min:3', 'max:255'],
             'description' => ['required', 'string', 'min:3',]
         ];
     }

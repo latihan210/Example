@@ -16,7 +16,6 @@ Route::middleware('auth')->group(function () {
 
     // Store routes
     Route::resource('stores', Controllers\StoreController::class);
-    Route::get('/stores/create', [Controllers\StoreController::class, 'create'])->name('stores.create');
 });
 
 require __DIR__ . '/auth.php';
